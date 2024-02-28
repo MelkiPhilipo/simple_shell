@@ -13,36 +13,36 @@ void Ctrl_na_c(int h)
 /**
  * kijenzi_chandani - a function that handles builtins (exit, env, cd)
  * @tokeni: a string typed by user
- * @mzngr: the variable of the environment
+ * @env: the variable of the environment
  * @hes: takes in a number of a command that user typed to write error message
  * @amri: takes in a command that will be freed
  * Return: Always 1 when acted on builtin, and 0 when not
  */
-int kijenzi_chandani(char **tokeni, list_t *mzngr, int hes, char **amri)
+int kijenzi_chandani(char **tokeni, list_t *env, int hes, char **amri)
 {
 	int rodh = 0;
 
 	if (_uzicmp(tokeni[0], "exit") == 0)
 	{
-		rodh = _kutoka(tokeni, mzngr, hes, amri);
+		rodh = _kutoka(tokeni, env, hes, amri);
 	}
-	else if (_uzicmp(tokeni[0], "mzngr") == 0)
+	else if (_uzicmp(tokeni[0], "env") == 0)
 	{
-		_mzngr(tokeni, mzngr);
+		_env(tokeni, env);
 		rodh = 1;
 	}
 	else if (_uzicmp(tokeni[0], "cd") == 0)
 	{
-		rodh = _cd(tokeni, mzngr, hes);
+		rodh = _cd(tokeni, env, hes);
 	}
 	else if (_uzicmp(tokeni[0], "setenv") == 0)
 	{
-		_pangaenv(&mzngr, tokeni);
+		_pangaenv(&env, tokeni);
 		rodh = 1;
 	}
 	else if (_uzicmp(tokeni[0], "unsetenv") == 0)
 	{
-		_ondoapangaenv(&mzngr, tokeni);
+		_ondoapangaenv(&env, tokeni);
 		rodh = 1;
 	}
 	return (rodh);
@@ -64,14 +64,14 @@ char *achanana_space(char *uzi)
  * Ctrl_na_d - a function that exits program if Ctrl-D was pressed
  * @rodh: the characters that are read via get_line
  * @amri: the string typed by user
- * @mzngr: the linked list of the variables of the environment
+ * @env: the linked list of the variables of the environment
  */
-void Ctrl_na_d(int rodh, char *amri, list_t *mzngr)
+void Ctrl_na_d(int rodh, char *amri, list_t *env)
 {
 	if (rodh == 0)
 	{
 		free(amri);
-		linked_listi_huru(mzngr);
+		linked_listi_huru(env);
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
@@ -85,23 +85,23 @@ void Ctrl_na_d(int rodh, char *amri, list_t *mzngr)
  */
 int prompti(char **mz)
 {
-	list_t *mzngr;
+	list_t *env;
 	size_t rodh = 0, h = 0;
 	int amri_mstari_no = 0, kutoka_stat = 0;
 	char *amri, *n_amri, **tokeni;
 
-	mzngr = mzngr_linked_list(mz);
+	env = env_linked_list(mz);
 	do {
 		amri_mstari_no++;
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 		else
-			isiyo_ingiliwakati(mzngr);
+			isiyo_ingiliwakati(env);
 		signal(SIGINT, Ctrl_na_c);
 		amri = NULL;
 		rodh = 0;
 		rodh = pata_line(&amri);
-		Ctrl_na_d(rodh, amri, mzngr);
+		Ctrl_na_d(rodh, amri, env);
 		n_amri = amri;
 		amri = achanana_space(amri);
 		h = 0;
@@ -117,10 +117,10 @@ int prompti(char **mz)
 		tokeni = _uzi_tok(amri, " ");
 		if (n_amri != NULL)
 			free(n_amri);
-		kutoka_stat = kijenzi_chandani(tokeni, mzngr, amri_mstari_no, NULL);
+		kutoka_stat = kijenzi_chandani(tokeni, env, amri_mstari_no, NULL);
 		if (kutoka_stat)
 			continue;
-		kutoka_stat = _kuexecve(tokeni, mzngr, amri_mstari_no);
+		kutoka_stat = _kuexecve(tokeni, env, amri_mstari_no);
 	} while (1);
 	return (kutoka_stat);
 }

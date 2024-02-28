@@ -3,23 +3,23 @@
 /**
  * c_kutoka - a function that makes freed of user's typed string
  * @uzi: a string typed by user
- * @mzngr: puts in the environmental linked list
+ * @env: puts in the environmental linked list
  */
-void c_kutoka(char **uzi, list_t *mzngr)
+void c_kutoka(char **uzi, list_t *env)
 {
 	frii_dabo_ptr(uzi);
-	linked_listi_huru(mzngr);
+	linked_listi_huru(env);
 	_exit(0);
 }
 
 /**
  * _kuexecve - a function that executes a string typed by user.
  * @z: a string typed by user
- * @mzngr: the variable of the environment
+ * @env: the variable of the environment
  * @hes: the user string of certain number to write error message
  * Return: Always 0 when success.
  */
-int _kuexecve(char **z, list_t *mzngr, int hes)
+int _kuexecve(char **z, list_t *env, int hes)
 {
 	char *shika;
 	int status = 0, st = 0;
@@ -31,10 +31,10 @@ int _kuexecve(char **z, list_t *mzngr, int hes)
 		st = 1;
 	}
 	else
-		shika = _niwhich(z[0], mzngr);
+		shika = _niwhich(z[0], env);
 	if (access(shika, X_OK) != 0)
 	{
-		hai_patikani(z[0], hes, mzngr);
+		hai_patikani(z[0], hes, env);
 		frii_dabo_ptr(z);
 		return (127);
 	}
@@ -45,8 +45,8 @@ int _kuexecve(char **z, list_t *mzngr, int hes)
 		{
 			if (execve(shika, z, NULL) == -1)
 			{
-				hai_patikani(z[0], hes, mzngr);
-				c_kutoka(z, mzngr);
+				hai_patikani(z[0], hes, env);
+				c_kutoka(z, env);
 			}
 		}
 		else

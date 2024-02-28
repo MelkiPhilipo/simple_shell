@@ -3,15 +3,15 @@
 /**
  * _niwhich - fleshes out command by appending it to a matching PATH directory
  * @uzi: first command user typed into shell
- * @mzngr: environmental variable
+ * @env: environmental variable
  * Return: a copy of fleshed out command
  */
-char *_niwhich(char *uzi, list_t *mzngr)
+char *_niwhich(char *uzi, list_t *env)
 {
 	char *njiy, *addto = NULL, **tokes;
 	int i = 0;
 
-	njiy = pata_env("PATH", mzngr);
+	njiy = pata_env("PATH", env);
 	tokes = c_uzi_tok(njiy, ":");
 	free(njiy);
 

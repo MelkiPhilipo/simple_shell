@@ -24,12 +24,12 @@ int _ku_atoyi(char *ng)
 /**
  * _kutoka - a function that frees a user input and exit with main program
  * @uzi: what the user puts on a shell
- * @mzngr: it search for environment variable and freed when error
+ * @env: it search for environment variable and freed when error
  * @hes: it counts and print error message
  * @amri: puts in command and then freed
  * Return: Always 0 when success and returns 2 when fails
  */
-int _kutoka(char **uzi, list_t *mzngr, int hes, char **amri)
+int _kutoka(char **uzi, list_t *env, int hes, char **amri)
 {
 	int thamani = 0;
 
@@ -38,12 +38,12 @@ int _kutoka(char **uzi, list_t *mzngr, int hes, char **amri)
 
 	if (thamani == -1)
 	{
-		namba_isiyohalali(uzi[1], hes, mzngr);
+		namba_isiyohalali(uzi[1], hes, env);
 		frii_dabo_ptr(uzi);
 		return (2);
 	}
 	frii_dabo_ptr(uzi);
-	linked_listi_huru(mzngr);
+	linked_listi_huru(env);
 	if (amri != NULL)
 		frii_dabo_ptr(amri);
 	exit(thamani);

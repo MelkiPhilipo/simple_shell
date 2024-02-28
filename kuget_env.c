@@ -34,26 +34,26 @@ char *c_uzirudf(char *uzi, int rt)
 /**
  * pata_env - a function that finds and returns a copy of the requested env var
  * @uzi: the string to store the env var in
- * @mzngr: whole set of the variables of the environment
+ * @env: whole set of the variables of the environment
  * Return: the copy of requested env var will be returned
  */
-char *pata_env(char *uzi, list_t *mzngr)
+char *pata_env(char *uzi, list_t *env)
 {
 	int s = 0, rt = 0;
 
-	while (mzngr != NULL)
+	while (env != NULL)
 	{
 		s = 0;
-		while ((mzngr->var)[s] == uzi[s])
+		while ((env->var)[s] == uzi[s])
 			s++;
-		if (uzi[s] == '\0' && (mzngr->var)[s] == '=')
+		if (uzi[s] == '\0' && (env->var)[s] == '=')
 			break;
-		mzngr = mzngr->inayofuata;
+		env = env->inayofuata;
 	}
 
 	while (uzi[rt] != '\0')
 		rt++;
 	rt++;
-	return (c_uzirudf(mzngr->var, rt));
+	return (c_uzirudf(env->var, rt));
 }
 

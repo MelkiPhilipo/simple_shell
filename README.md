@@ -38,11 +38,11 @@
 
 19. `linked_listi_huru`: This function could be implemented to free a linked list. You could use a loop to iterate through the list and free each node.
 
-20. `_mzngr`: This function could be implemented to manage the environment variables. It could use a series of `if` or `switch` statements to determine which action to take.
+20. `_env`: This function could be implemented to manage the environment variables. It could use a series of `if` or `switch` statements to determine which action to take.
 
 21. `pata_env`: This function could be implemented to get an environment variable. You could use the `getenv` function for this.
 
-22. `mzngr_linked_list`: This function could be implemented to create a linked list of environment variables. You could use a loop to iterate through the environment variables and add each one to the list.
+22. `env_linked_list`: This function could be implemented to create a linked list of environment variables. You could use a loop to iterate through the environment variables and add each one to the list.
 
 23. `ongeza_mwisho_node`: This function could be implemented to add a node at the end of a linked list. You could use a loop to find the end of the list and then add the new node.
 
@@ -54,7 +54,7 @@
 
 27. `_pangaenv`: This function could be implemented to set an environment variable. You could use the `setenv` function for this.
 
-28. `tafuta_mzngr`: This function could be implemented to search for an environment variable. You could use a loop to iterate through the environment variables and compare each one with the target variable.
+28. `tafuta_env`: This function could be implemented to search for an environment variable. You could use a loop to iterate through the environment variables and compare each one with the target variable.
 
 29. `hai_patikani`: This function could be implemented to handle command not found errors. It could print an error message to the user.
 

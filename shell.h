@@ -24,12 +24,12 @@ typedef struct list
 	struct list *inayofuata;
 } list_t;
 
-void c_kutoka(char **uzi, list_t *mzngr);
-int _kuexecve(char **z, list_t *mzngr, int hes);
+void c_kutoka(char **uzi, list_t *env);
+int _kuexecve(char **z, list_t *env, int hes);
 size_t pata_line(char **uzi);
 void *_urealloc(void *onyeshi, unsigned int ukubwa_zamani,
 		unsigned int ukubwa_mpya);
-char *_niwhich(char *uzi, list_t *mzngr);
+char *_niwhich(char *uzi, list_t *env);
 char *_uziaddto(char *htma, char *uziadd);
 int _uzicmp(char *z1, char *z2);
 char *_uzikopi(char *htma, char *uziadd);
@@ -44,33 +44,33 @@ void frii_dabo_ptr(char **uzi);
 char *integer_kwenda_string(int hesabu);
 int hesure(int h);
 char *c_achana(char *uzi);
-void isiyo_ingiliwakati(list_t *mzngr);
+void isiyo_ingiliwakati(list_t *env);
 char *c_uziaddto(char *htma, char *uziadd);
-int c_pangaenv(list_t **mzngr, char *jina, char *dirpath);
-void cd_tu(list_t *mzngr, char *yasasa);
-int cd_utekelezaji(list_t *mzngr, char *yasasa, char *dirpath, char *uzi,
+int c_pangaenv(list_t **env, char *jina, char *dirpath);
+void cd_tu(list_t *env, char *yasasa);
+int cd_utekelezaji(list_t *env, char *yasasa, char *dirpath, char *uzi,
 		int hes);
-int _cd(char **uzi, list_t *mzngr, int hes);
+int _cd(char **uzi, list_t *env, int hes);
 char *c_uzirudf(char *uzi, int rt);
-char *pata_env(char *uzi, list_t *mzngr);
+char *pata_env(char *uzi, list_t *env);
 size_t print_orodha(list_t *k);
 list_t *ongeza_mwisho_node(list_t **kichwa, char *uzi);
 int futa_nodeint_kwenye_faharisi(list_t **kichwa, int faharisi);
 void linked_listi_huru(list_t *list);
-void hai_patikani(char *uzi, int v_h, list_t *mzngr);
-void haiwezi_kucd_kwenye(char *uzi, int v_h, list_t *mzngr);
-void namba_isiyohalali(char *uzi, int v_h, list_t *mzngr);
-int tafuta_mzngr(list_t *mzngr, char *uzi);
-int _ondoapangaenv(list_t **mzngr, char **uzi);
-int _pangaenv(list_t **mzngr, char **uzi);
+void hai_patikani(char *uzi, int v_h, list_t *env);
+void haiwezi_kucd_kwenye(char *uzi, int v_h, list_t *env);
+void namba_isiyohalali(char *uzi, int v_h, list_t *env);
+int tafuta_env(list_t *env, char *uzi);
+int _ondoapangaenv(list_t **env, char **uzi);
+int _pangaenv(list_t **env, char **uzi);
 int _ku_atoyi(char *ng);
-int _kutoka(char **uzi, list_t *mzngr, int hes, char **amri);
-list_t *mzngr_linked_list(char **mzngr);
-int _mzngr(char **uzi, list_t *mzngr);
+int _kutoka(char **uzi, list_t *env, int hes, char **amri);
+list_t *env_linked_list(char **env);
+int _env(char **uzi, list_t *env);
 void Ctrl_na_c(int h);
-int kijenzi_chandani(char **tokeni, list_t *mzngr, int hes, char **amri);
+int kijenzi_chandani(char **tokeni, list_t *env, int hes, char **amri);
 char *achanana_space(char *uzi);
-void Ctrl_na_d(int rodh, char *amri, list_t *mzngr);
+void Ctrl_na_d(int rodh, char *amri, list_t *env);
 int prompti(char **mz);
 
 

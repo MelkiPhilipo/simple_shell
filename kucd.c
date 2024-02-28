@@ -41,12 +41,12 @@ char *c_uziaddto(char *htma, char *uziadd)
 
 /**
  * c_pangaenv - a function that set environment and concatetes string before
- * @mzngr: holds the linked list of the environment variable
+ * @env: holds the linked list of the environment variable
  * @jina: the name of the variable of the environment
  * @dirpath: The path of the directory
  * Return: Always 0 when success
  */
-int c_pangaenv(list_t **mzngr, char *jina, char *dirpath)
+int c_pangaenv(list_t **env, char *jina, char *dirpath)
 {
 	int faharisi = 0, r = 0;
 	char *addto;
@@ -55,9 +55,9 @@ int c_pangaenv(list_t **mzngr, char *jina, char *dirpath)
 	addto = _uzirudf(jina);
 	addto = _uziaddto(addto, "=");
 	addto = _uziaddto(addto, dirpath);
-	faharisi = tafuta_mzngr(*mzngr, jina);
+	faharisi = tafuta_env(*env, jina);
 
-	shika = *mzngr;
+	shika = *env;
 	while (r < faharisi)
 	{
 		shika = shika->inayofuata;
@@ -69,15 +69,15 @@ int c_pangaenv(list_t **mzngr, char *jina, char *dirpath)
 
 /**
  * cd_tu - a function that makes a move from directory to home
- * @mzngr: takes in a linked list of environment
+ * @env: takes in a linked list of environment
  * @yasasa: takes in a directory that is currently at working
  */
-void cd_tu(list_t *mzngr, char *yasasa)
+void cd_tu(list_t *env, char *yasasa)
 {
 	char *nyumbani = NULL;
 
-	nyumbani = pata_env("HOME", mzngr);
-	c_pangaenv(&mzngr, "OLDPWD", yasasa);
+	nyumbani = pata_env("HOME", env);
+	c_pangaenv(&env, "OLDPWD", yasasa);
 	free(yasasa);
 	if (access(nyumbani, F_OK) == 0)
 		chdir(nyumbani);
@@ -89,31 +89,31 @@ void cd_tu(list_t *mzngr, char *yasasa)
 
 /**
  * cd_utekelezaji - kutekeleza the cd
- * @mzngr: takes in linked list of the environment
+ * @env: takes in linked list of the environment
  * @yasasa: takes in the directory that is currently at working
  * @dirpath: takes in the path of the directory to chaange to
  * @uzi: takes in the first argument in order to write out an error
  * @hes: takes in the number of the line to write out an error
  * Return: Always 0 when success and 2 when fails
  */
-int cd_utekelezaji(list_t *mzngr, char *yasasa, char *dirpath, char *uzi,
+int cd_utekelezaji(list_t *env, char *yasasa, char *dirpath, char *uzi,
 		int hes)
 {
 	int d = 0;
 
 	if (access(dirpath, F_OK) == 0)
 	{
-		c_pangaenv(&mzngr, "OLDPWD", yasasa);
+		c_pangaenv(&env, "OLDPWD", yasasa);
 		free(yasasa);
 		chdir(dirpath);
 		yasasa = NULL;
 		yasasa = getcwd(yasasa, 0);
-		c_pangaenv(&mzngr, "PWD", yasasa);
+		c_pangaenv(&env, "PWD", yasasa);
 		free(yasasa);
 	}
 	else
 	{
-		haiwezi_kucd_kwenye(uzi, hes, mzngr);
+		haiwezi_kucd_kwenye(uzi, hes, env);
 		free(yasasa);
 		d = 2;
 	}
@@ -123,11 +123,11 @@ int cd_utekelezaji(list_t *mzngr, char *yasasa, char *dirpath, char *uzi,
 /**
  * _cd - a function that changes directory
  * @uzi: a string typed in by user
- * @mzngr: linked list of the environment to retrieve paths (HOME and OLDPWD)
+ * @env: linked list of the environment to retrieve paths (HOME and OLDPWD)
  * @hes: the user command of the certain number to be used at error message
  * Return: Always 0 when success and 2 when fails
  */
-int _cd(char **uzi, list_t *mzngr, int hes)
+int _cd(char **uzi, list_t *env, int hes)
 {
 	char *yasasa = NULL, *dirpath = NULL;
 	int kutoka_stat = 0;
@@ -137,13 +137,13 @@ int _cd(char **uzi, list_t *mzngr, int hes)
 	{
 		if (uzi[1][0] == '~')
 		{
-			dirpath = pata_env("HOME", mzngr);
+			dirpath = pata_env("HOME", env);
 			dirpath = c_uziaddto(dirpath, uzi[1]);
 		}
 		else if (uzi[1][0] == '-')
 		{
 			if (uzi[1][1] == '\0')
-				dirpath = pata_env("OLDPWD", mzngr);
+				dirpath = pata_env("OLDPWD", env);
 		}
 		else
 		{
@@ -156,11 +156,11 @@ int _cd(char **uzi, list_t *mzngr, int hes)
 			else
 				dirpath = _uzirudf(uzi[1]);
 		}
-		kutoka_stat = cd_utekelezaji(mzngr, yasasa, dirpath, uzi[1], hes);
+		kutoka_stat = cd_utekelezaji(env, yasasa, dirpath, uzi[1], hes);
 		free(dirpath);
 	}
 	else
-		cd_tu(mzngr, yasasa);
+		cd_tu(env, yasasa);
 	frii_dabo_ptr(uzi);
 	return (kutoka_stat);
 }
