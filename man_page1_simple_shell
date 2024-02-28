@@ -1,0 +1,44 @@
+.PeculiarShell(1) User Manuals PeculiarShell(1)
+
+.NAME
+    PeculiarShell - a peculiar, simple shell
+
+.SYNOPSIS
+    PeculiarShell [OPTION]... [FILE]...
+
+.DESCRIPTION
+    PeculiarShell is a simple, peculiar shell that allows users to interact with their system. It supports basic commands and has a few peculiar features that set it apart.
+
+.OPTIONS
+    -h, --help
+        Display the help menu.
+
+    -v, --version
+        Display the current version of PeculiarShell.
+
+    -c, --command
+        Execute the following command string.
+
+    -s, --silent
+        Silent mode. Do not output any unnecessary information.
+
+.EXAMPLES
+    PeculiarShell -c "echo Hello, World!"
+        Executes the command "echo Hello, World!".
+
+    PeculiarShell -s -c "ls"
+        Executes the command "ls" in silent mode.
+
+.EXIT STATUS
+    PeculiarShell returns a zero exit status if it succeeds. Non-zero is returned in case of failure.
+
+.AUTHOR
+    Written by an imaginative user.
+
+.SEE ALSO
+    bash(1), sh(1), dash(1), ksh(1), csh(1), tcsh(1), zsh(1)
+
+.PeculiarShell 2024
+
+
+
